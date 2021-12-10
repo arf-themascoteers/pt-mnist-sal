@@ -1,3 +1,6 @@
-Run train.py to train the machine
+In terminal, run
+```
+pip install -r requirements.txt
+```
 
-And then, run test.py to test using the trained parameters.
+Then run main.py
