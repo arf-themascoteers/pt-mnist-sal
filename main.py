@@ -22,11 +22,11 @@ test_digits_data = EMNIST(
     split="digits"
 )
 
-machine_location = models/machine.h5
+machine_location = "models/machine.h5"
 model = MNISTNet()
-if os.path.isfile(machine_location):
-    model = torch.load("models/cnn_trans.h5")
-else:
+if not os.path.isfile(machine_location):
     model = train.train(model, train_digits_data)
-torch.save(model, 'models/machine.h5')
+    torch.save(model, machine_location)
+
+model = torch.load(machine_location)
 test.test(model, test_digits_data)
