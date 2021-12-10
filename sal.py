@@ -22,7 +22,12 @@ def test(model, working_set):
         final.backward()
 
         x = data.grad
-        x = torch.abs(x)
+        std = torch.std(x)
+        mean = torch.mean(x)
+
+        x = (x-mean)/std
+        x = x - torch.min(x)
+
         x = x.squeeze().squeeze()
         x = x.detach().numpy()
         plt.imshow(x, cmap="hot")
